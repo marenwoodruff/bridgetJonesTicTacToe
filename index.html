@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+<script src="https://cdn.firebase.com/v0/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
+
+<script type="text/javascript" src="main.js"></script>
+<style>
+	.main { width: 320px; margin: 0 auto; }
+	.board { width: 320px; margin: 0 auto; }
+	.cell {width:100px; height:100px; background-color:orange; text-indent: -9999px;
+		margin:1px; float:left;}
+	.clear {clear:both;}
+	.x { background:url("Mark_Darcy.jpg"); }
+	.o { background:url("Daniel_Cleaver.jpg"); }
+	h3 { text-align: center}
+</style>
+
+</head>
+
+<body>
+
+	<div class="main" x-ng-app="TicTac" x-ng-controller="TicTacCtrl">
+		
+		<div class="board" x-ng-repeat="x in obj.board track by $index"
+		  x-ng-class="{clear:$index % 3 == 0, cell:true, x: x == 'X', o: x == 'O'}"
+		  x-ng-click="makeMove($index);"
+		  >{{x}}
+		</div>
+	
+		<h3 x-ng-click="reset()">
+			RESET
+		</h3>
+
+	</div>
+
+</body>
+
+</html>
