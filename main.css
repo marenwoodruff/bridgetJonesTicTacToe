@@ -1,0 +1,199 @@
+body {
+	background-image: url("moviefaded.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: 'Yeseva One', Helvetica;
+}
+
+/*<style>
+ 	.main { width: 320px; margin: 0 auto; }
+ 	.board { width: 320px; margin: 0 auto; }
+ 	.cell {width:100px; height:100px; background-color:orange; text-indent: -9999px;
+ 		margin:1px; float:left;}
+ 	.clear {clear:both;}
+ 	.x { background:url("Mark_Darcy.jpg"); }
+ 	.o { background:url("Daniel_Cleaver.jpg"); }
+ 	h3 { text-align: center;}
+ </style>*/
+
+h1 {
+	font-size: 70px;
+	text-align: center;
+	color: #440000;
+}
+
+.main {
+	width: 400px;
+	margin: 0 auto;
+/*	margin-left: auto;
+	margin-right: auto;*/
+
+}
+
+.cell {
+	height: 100px;
+	width: 100px;
+	border: 2px solid black;
+	float: left;
+	text-indent: -9999px;
+}
+
+.cell:hover {
+	background-color: #550000;
+}
+
+input[type="button"] {
+	text-align: center;
+	font-size: 20px;
+	font-family: 'Yeseva One', Helvetica;
+	height: 35px;
+	width: 120px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 2px solid;
+	margin: 0 auto;
+	/*float: right;
+	margin-right: 150px;
+	padding-right: 20px;*/
+}
+
+input.button:hover {
+	background-color: red;
+	text-align: center;
+}
+
+.popup {
+	width: 315px;
+	height: 260px;
+	margin: 0 auto;
+	float: left;
+	font-weight: bold;
+	background-color: #F2E0E0;
+}
+
+#players {
+	/*height: 100%;*/
+	float: right;
+	bottom: 0;
+	font-size: 30px;
+	color: #770000;
+	font-weight: bold;
+	padding-right: 30px;
+}
+
+p:hover {
+	color: red;
+}
+
+.x {
+	font-size: 25px;
+	background:url("Mark_Darcy.jpg");
+	height: 100px;
+	width: 100px;
+	border: 2px solid black;
+}
+
+.x:hover {
+	opacity: 0.8;
+}
+
+.o {
+	font-size: 25px;
+	background:url("Daniel_Cleaver.jpg");
+	height: 100px;
+	width: 100px;
+	border: 2px solid black;
+}
+
+.o:hover {
+	opacity: 0.8;
+}
+		
+@media (max-width: 1024px) {
+	h1 {
+		font-size: 60px;
+	}
+}
+
+@media (max-width: 770px) {
+	h1 {
+		font-size: 50px;
+	}
+}
+
+@media (max-width: 640px) {
+	h1 {
+		font-size: 40px;
+	}
+}
+
+
+@media (max-width: 480px) {
+	h1 {
+		font-size: 27px;
+		padding 5px;
+		display: block;
+		padding-bottom: 70px;
+	}
+
+	.main {
+		height: 170px;
+		width: 170px;
+	}
+
+	.board {
+		height: 170px;
+		width: 170px;
+		display: block;
+		float: left;
+	}
+
+	.cell {
+		height: 50px;
+		width: 50px;
+		border: 1px solid black;
+	}
+
+	#players {
+		padding: 5px;
+		display: block;
+		text-align: center;
+		font-size: 22px;
+		display: block;
+	}
+
+	.x {
+		font-size: 20px;
+		background:url("Mark_Darcy.small.jpg");
+
+	}
+
+	img {
+		height: 48px;
+		width: 48px;
+		border: 1px solid black;
+	}
+
+	.o {
+		font-size: 20px;
+		background:url("Daniel_Cleaver.small.jpg");
+
+	}
+
+	input[type="button"] {
+		margin-right: 30px;
+		height: 30px;
+		width: 113px;
+		font-size: 18px;
+	} 
+/*input[type="button"] {
+		margin-right: 15px;
+	}
+*/
+}
+
+@media (max-width: 320px) {
+	input[type="button"] {
+		margin-right: 32px;
+	} 
+}

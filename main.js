@@ -3,10 +3,11 @@ var IDs;
 var moveCount = 0;
 var winner = false;
 
+
 angular.module("TicTac", ["firebase"])
  .controller("TicTacCtrl", function($scope, $firebase){
  	
- 	ticTacRef = new Firebase("hhttps://newttt.firebaseio.com/");
+ 	ticTacRef = new Firebase("https://newttt.firebaseio.com/");
  	$scope.fbRoot = $firebase(ticTacRef);
 
  	// Wait until everything really is loaded
@@ -17,17 +18,22 @@ angular.module("TicTac", ["firebase"])
 			// What???  No Board????  Let's build one.
 	 		$scope.fbRoot.$add( { board:['','','','','','','','',''],
  	 			xTurn:true} );
+	 			// this is where you are creating all of your data
 			$scope.fbRoot.$on("change", function() {
 				IDs = $scope.fbRoot.$getIndex();
 				$scope.obj = $scope.fbRoot.$child(IDs[0]);
+				// obj is all of the properties of your firebase
 			});
 		}
 		else
 		{
 			$scope.obj = $scope.fbRoot.$child(IDs[0]);
 		}
-
+		$scope.darcyWinMessage = {val: false, message: ""};
+		$scope.cleaverWinMessage = { val: false, message: ""}; 
+		$scope.catsGame = { val: false, message: ""};
 	});
+
 
  	$scope.makeMove = function(idx){
  		if($scope.obj.board[idx]=="")
@@ -40,56 +46,126 @@ angular.module("TicTac", ["firebase"])
 			console.log(moveCount);
  		}
 
-//horizontal win conditions
- 		if ($scope.obj.board[0] == $scope.obj.board[1]&& $scope.obj.board[1] == $scope.obj.board[2]&& $scope.obj.board[2] != "") {
- 				console.log("you won horizontally in the first row");
+		//horizontal win conditions for Darcy
+ 		if ($scope.obj.board[0] == $scope.obj.board[1]&& $scope.obj.board[1] == $scope.obj.board[2]&& $scope.obj.board[2] != "" && $scope.obj.board[2] == "X") {
+ 				$scope.darcyWinMessage.message = "Bridget:: I'm so sorry. I didn't mean it. Well, I meant it, but I was so stupid that I didn't mean what I meant... After all, it's only a diary. Everyone knows diaries are just... full of crap. Darcy:: Yes, I know that. I was just buying you a new one. ";
  				winner = true;
+ 				$scope.darcyWinMessage.val = !$scope.darcyWinMessage.val;
  		}
- 		if ($scope.obj.board[3] == $scope.obj.board[4]&& $scope.obj.board[4] == $scope.obj.board[5]&& $scope.obj.board[5] != "") {
- 				console.log("you won horizontally in the middle row");
+ 		if ($scope.obj.board[3] == $scope.obj.board[4]&& $scope.obj.board[4] == $scope.obj.board[5]&& $scope.obj.board[5] != "" && $scope.obj.board[5] == "X") {
+ 				$scope.darcyWinMessage.message = "Bridget:: Wait a minute... nice boys don't kiss like that. Darcy:: Oh, yes, they fucking do. ";
  				winner = true;
+ 				$scope.darcyWinMessage.val = !$scope.darcyWinMessage.val;
  		}
- 		if ($scope.obj.board[6] == $scope.obj.board[7]&& $scope.obj.board[7] == $scope.obj.board[8]&& $scope.obj.board[8] != "") {
- 				console.log("you won horizontally in the first row");
+ 		if ($scope.obj.board[6] == $scope.obj.board[7]&& $scope.obj.board[7] == $scope.obj.board[8]&& $scope.obj.board[8] != "" && $scope.obj.board[8] == "X") {
+ 				$scope.darcyWinMessage.message = "Darcy:: I realize that when I met you at the turkey curry buffet, I was unforgivably rude, and wearing a reindeer jumper. ";
  				winner = true;
+ 				$scope.darcyWinMessage.val = !$scope.darcyWinMessage.val;
  		}
 
- 		//vertical win conditions
- 		if ($scope.obj.board[0] == $scope.obj.board[3] && $scope.obj.board[3] == $scope.obj.board[6]&& $scope.obj.board[6] != "") {
- 				console.log("you won vertically in the first column");
+ 		//horizontal win conditions for Cleaver
+ 		if ($scope.obj.board[0] == $scope.obj.board[1]&& $scope.obj.board[1] == $scope.obj.board[2]&& $scope.obj.board[2] != "" && $scope.obj.board[2] == "O") {
+ 				$scope.cleaverWinMessage.message = "Cleaver:: Now these are very silly little boots, Jones. And this is a very silly little dress. And, um, these are, fuck me, absolutely enormous panties. Bridget:: Jesus. Fuck. Cleaver:: No, no. Don't apologize. I like them. Hello, Mummy. [they kiss] Cleaver:: I'm sorry, I have to have another look. They're too good to be true. Bridget:: No... Cleaver:: They're nothing to be embarrassed about. I'm wearing something similar myself. ";
  				winner = true;
+ 				$scope.cleaverWinMessage.val = !$scope.cleaverWinMessage.val;
  		}
- 		if ($scope.obj.board[1] == $scope.obj.board[4] && $scope.obj.board[4] == $scope.obj.board[7]&& $scope.obj.board[7] != "") {
- 				console.log("you won vertically in the middle column");
+ 		if ($scope.obj.board[3] == $scope.obj.board[4]&& $scope.obj.board[4] == $scope.obj.board[5]&& $scope.obj.board[5] != "" && $scope.obj.board[5] == "O") {
+ 				$scope.cleaverWinMessage.message = "Bridget:: Daniel, what you just did is actually illegal in several countries. Cleaver:: That is one of the reasons that I'm so thrilled to be living in Britain today. ";
  				winner = true;
+ 				$scope.cleaverWinMessage.val = !$scope.cleaverWinMessage.val;
  		}
- 		if ($scope.obj.board[3] == $scope.obj.board[5] && $scope.obj.board[5] == $scope.obj.board[8]&& $scope.obj.board[8] != "") {
- 				console.log("you won vertically in the last column");
+ 		if ($scope.obj.board[6] == $scope.obj.board[7]&& $scope.obj.board[7] == $scope.obj.board[8]&& $scope.obj.board[8] != "" && $scope.obj.board[8] == "O") {
+ 				$scope.cleaverWinMessage.message = "Cleaver:: First, have some more wine, and then tell me the story about practicing French kissing with the art girls at school, because it's a very good story. Bridget:: It wasn't French kissing. Cleaver:: Don't care, make it up. That's an order, Jones. ";
  				winner = true;
+ 				$scope.cleaverWinMessage.val = !$scope.cleaverWinMessage.val;
  		}
- 		//diagonal win conditions
- 		if ($scope.obj.board[0] == $scope.obj.board[4] && $scope.obj.board[4] == $scope.obj.board[8]&& $scope.obj.board[8] != "") {
- 				console.log("you won diagonally from the first column to the last column");
+
+
+
+ 		//vertical win conditions for Darcy
+ 		if ($scope.obj.board[0] == $scope.obj.board[3] && $scope.obj.board[3] == $scope.obj.board[6]&& $scope.obj.board[6] != "" && $scope.obj.board[6] == "X") {
+ 				$scope.darcyWinMessage.message = "Bridget:: [as Una Alconberry] No, Pam. Besides, the gravy needs sieving. Darcy:: [as Pamela Jones] Surely not, just stir it Una. ";
  				winner = true;
+ 				$scope.darcyWinMessage.val = !$scope.darcyWinMessage.val;
  		}
- 		if ($scope.obj.board[3] == $scope.obj.board[4] && $scope.obj.board[4] == $scope.obj.board[6]&& $scope.obj.board[6] != "") {
- 				console.log("you won vertically from the third column to the sixth column");
+ 		if ($scope.obj.board[1] == $scope.obj.board[4] && $scope.obj.board[4] == $scope.obj.board[7]&& $scope.obj.board[7] != "" && $scope.obj.board[7] == "X") {
+ 				$scope.darcyWinMessage.message = "Darcy:: I like you, very much. Bridget:: Ah, apart from the smoking and the drinking, the vulgar mother and... ah, the verbal diarrhea. Darcy:: No, I like you very much. Just as you are. ";
  				winner = true;
+ 				$scope.darcyWinMessage.val = !$scope.darcyWinMessage.val;
  		}
+ 		if ($scope.obj.board[3] == $scope.obj.board[5] && $scope.obj.board[5] == $scope.obj.board[8]&& $scope.obj.board[8] != "" && $scope.obj.board[8] == "X") {
+ 				$scope.darcyWinMessage.message = "Bridget:: You once said you liked me just as I am and I just wanted to say likewise. I mean there are stupid things your mum buys you, tonight's another... classic. You're haughty, and you always say the wrong thing in every situation and I seriously believe that you should rethink the length of your sideburns. But, you're a nice man and I like you. If you wanted to pop by some time that might be nice... more than nice. Darcy:: Right, crikey.  ";
+ 				winner = true;
+ 				$scope.darcyWinMessage.val = !$scope.darcyWinMessage.val;
+ 		}
+
+ 		//vertical win conditions for Cleaver
+ 		if ($scope.obj.board[0] == $scope.obj.board[3] && $scope.obj.board[3] == $scope.obj.board[6]&& $scope.obj.board[6] != "" && $scope.obj.board[6] == "O") {
+ 				$scope.cleaverWinMessage.message = "Cleaver:: Now these are very silly little boots, Jones. And this is a very silly little dress. And, um, these are, fuck me, absolutely enormous panties. Bridget:: Jesus. Fuck. Cleaver:: No, no. Don't apologize. I like them. Hello, Mummy. [they kiss] Cleaver:: I'm sorry, I have to have another look. They're too good to be true. Bridget:: No... Cleaver:: They're nothing to be embarrassed about. I'm wearing something similar myself. ";
+ 				winner = true;
+ 				$scope.cleaverWinMessage.val = !$scope.cleaverWinMessage.val;
+ 		}
+ 		if ($scope.obj.board[1] == $scope.obj.board[4] && $scope.obj.board[4] == $scope.obj.board[7]&& $scope.obj.board[7] != "" && $scope.obj.board[7] == "O") {
+ 				$scope.cleaverWinMessage.message = "Bridget:: Daniel, what you just did is actually illegal in several countries. Cleaver:: That is one of the reasons that I'm so thrilled to be living in Britain today. ";
+ 				winner = true;
+ 				$scope.cleaverWinMessage.val = !$scope.cleaverWinMessage.val;
+ 		}
+ 		if ($scope.obj.board[3] == $scope.obj.board[5] && $scope.obj.board[5] == $scope.obj.board[8]&& $scope.obj.board[8] != "" && $scope.obj.board[8] == "O") {
+ 				$scope.cleaverWinMessage.message = "Cleaver:: I've been going crazy. I can't stop thinking about you, and thinking about what an idiot I've been. Christ, is that blue soup? ";
+ 				winner = true;
+ 				$scope.cleaverWinMessage.val = !$scope.cleaverWinMessage.val;
+ 		}
+
+
+ 		//diagonal win conditions for Darcy
+ 		if ($scope.obj.board[0] == $scope.obj.board[4] && $scope.obj.board[4] == $scope.obj.board[8]&& $scope.obj.board[8] != "" && $scope.obj.board[8] == "X") {
+ 				$scope.darcyWinMessage.message = "[regarding the blue soup] Bridget:: How's it look? Mark:: Uh, great. It's, um, blue. Bridget:: Blue? Mark:: No, but, blue is good. If you ask me there isn't enough blue food. Bridget:: Oh, shit! It must be the string. Mark:: Oh, it's string soup? ";
+ 				winner = true;
+ 				$scope.darcyWinMessage.val = !$scope.darcyWinMessage.val;
+ 		}
+ 		if ($scope.obj.board[2] == $scope.obj.board[4] && $scope.obj.board[4] == $scope.obj.board[6]&& $scope.obj.board[6] != "" && $scope.obj.board[6] == "X") {
+ 				$scope.darcyWinMessage.message = "Darcy: I don't think you're an idiot at all. I mean, there are elements of the ridiculous about you. Your mother's pretty interesting. And you really are an appallingly bad public speaker. And, um, you tend to let whatever's in your head come out of your mouth without much consideration of the consequences... But the thing is, um, what I'm trying to say, very inarticulately, is that, um, in fact, perhaps despite appearances, I like you, very much. Just as you are. ";
+ 				winner = true;
+ 				$scope.darcyWinMessage.val = !$scope.darcyWinMessage.val;
+ 		}
+
+
+ 		//diagonal win conditions for Cleaver
+ 		if ($scope.obj.board[0] == $scope.obj.board[4] && $scope.obj.board[4] == $scope.obj.board[8]&& $scope.obj.board[8] != "" && $scope.obj.board[8] == "O") {
+ 				$scope.cleaverWinMessage.message = "Bridget:: So what do you think of the situation in Chechnya? Cleaver:: I couldn't give a fuck, Jones. ";
+ 				winner = true;
+ 				$scope.cleaverWinMessage.val = !$scope.cleaverWinMessage.val;
+ 		}
+
+ 		if ($scope.obj.board[2] == $scope.obj.board[4] && $scope.obj.board[4] == $scope.obj.board[6]&& $scope.obj.board[6] != "" && $scope.obj.board[6] == "O") {
+ 				$scope.cleaverWinMessage.message = "Bridget:: Apparently, I used to run round naked in his paddling pool. Cleaver:: I bet you did, you dirty bitch.";
+ 				winner = true;
+ 				$scope.cleaverWinMessage.val = !$scope.cleaverWinMessage.val;
+ 		}
+
+
  		//cats game	
  		if (moveCount == 9 && winner == false) {
- 			console.log("Cat's game");
+ 			$scope.catsGame.message = "Cleaver:: [lands on restaurant table] I'm so sorry, I'm so sorry! Darcy:: [places hand in someone's salad] Oh, God! I'm sorry! [wipes dirty hand on man's suit] Darcy:: I really am sorry. I-I will pay. Cleaver:: Had enough Darcy? Darcy:: Not quite, if that's all right by you. [punches Daniel hard] Waiter:: Happy birthday to you... [everyone joins in, stopping fight] Waiter:: Happy birthday to you! Darcy:: Happy birthday dear what's-his-name... Cleaver:: Happy birthday to you... [tackles Darcy, both fly out window] Currently the game is a draw. Press 'New Game' to start again!";
+ 				$scope.catsGame.val = !$scope.catsGame.val;
  		}
 
  	};
 
 
 
- 		$scope.reset = function(){
- 			console.log("I am resetting");
+ 		$scope.reset = function(){ 
  			$scope.obj.board=['','','','','','','','',''];
  			moveCount = 0;
+ 			$scope.darcyWinMessage = {val: false, message: ""};
+			$scope.cleaverWinMessage = { val: false, message: ""}; 
+			$scope.catsGame = { val: false, message: ""};
+ 			// $scope.darcyWinMessage.val = !$scope.darcyWinMessage.val;
+ 			// $scope.cleaverWinMessage.val = !$scope.cleaverWinMessage.val;
+ 			// $scope.catsGame.val = !$scope.catsGame.val;
+
  		};
 
  
  });
+

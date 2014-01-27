@@ -2,26 +2,38 @@
 <html>
 
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
-<script src="https://cdn.firebase.com/v0/firebase.js"></script>
-<script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
+	
+	<title>
+		Bridget Jones Tic Tac Toe
+	</title>
 
-<script type="text/javascript" src="main.js"></script>
-<style>
-	.main { width: 320px; margin: 0 auto; }
-	.board { width: 320px; margin: 0 auto; }
-	.cell {width:100px; height:100px; background-color:orange; text-indent: -9999px;
-		margin:1px; float:left;}
-	.clear {clear:both;}
-	.x { background:url("Mark_Darcy.jpg"); }
-	.o { background:url("Daniel_Cleaver.jpg"); }
-	h3 { text-align: center}
-</style>
+	<link rel="stylesheet" type="text/javascript" href="main.css" />
+	<link href='http://fonts.googleapis.com/css?family=Yeseva+One' rel='stylesheet' type='text/css'>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+	<script src="https://cdn.firebase.com/v0/firebase.js"></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
+
+	<script type="text/javascript" src="main.js"></script>
 
 </head>
 
 <body>
+	<header><h1><u>Bridget Jones Tic Tac Toe</u></h1></header>
 
+	<div id="players">
+
+		<div id="X">
+			Mark Darcy  <img src="Mark_Darcy.jpg" title="Mark Darcy" alt="Mark Darcy" style="height:48px; width:48px"/>
+		</div>
+
+		<div id="O">
+			Daniel Cleaver  <img src="Daniel_Cleaver.jpg" title="Daniel Cleaver" alt="Daniel Cleaver" style="height:48px; width:48px"/>
+		</div>
+
+	</div>
+
+	<br />
+	<br />
 	<div class="main" x-ng-app="TicTac" x-ng-controller="TicTacCtrl">
 		
 		<div class="board" x-ng-repeat="x in obj.board track by $index"
@@ -29,13 +41,28 @@
 		  x-ng-click="makeMove($index);"
 		  >{{x}}
 		</div>
-	
-		<h3 x-ng-click="reset()">
-			RESET
-		</h3>
+		<br />
+		<input type="button" class="button" value="New Game" x-ng-click="reset()" />
 
+
+		
+			<div class="popup" x-ng-show="darcyWinMessage.val">
+				{{darcyWinMessage.message}}
+			</div>
+
+			<div class="popup" x-ng-show="cleaverWinMessage.val">
+				{{cleaverWinMessage.message}}
+			</div>
+
+			<div class="popup" x-ng-show="catsGame.val">
+				{{catsGame.message}}
+			</div>
+		
+		
 	</div>
+
 
 </body>
 
 </html>
+
